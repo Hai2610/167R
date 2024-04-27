@@ -36,6 +36,8 @@ library(tidyselect, quietly = TRUE)
 MORTGAGE15US <- readr::read_csv("MORTGAGE15US.csv")
 MORTGAGE30US <- readr::read_csv("MORTGAGE30US.csv")
 CONDO <- readr::read_csv("Condo.csv")
+
+
  
 
 ```
