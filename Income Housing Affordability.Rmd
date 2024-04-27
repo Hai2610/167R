@@ -243,6 +243,27 @@ ggplot(Median_HP_SantaClara_filtered,
   scale_y_continuous(labels = scales::dollar_format(prefix = "$"), breaks = seq(0, 3000000, by = 250000)) +
   theme_minimal()
 
+
+HAI MOI LAM
+```{r}
+#SFH
+by_month_year_SFH <- SFH_Price |> mutate(Year = as.integer(format(as.Date(Date), "%Y")),Month = as.integer(format(as.Date(Date), "%m")))|>
+    group_by(Year)
+#mean price SFH by year
+mean_by_year_SFH <- by_month_year_SFH |> group_by(Year, Month) |> summarize(mean_SFH_price = mean(SFH_Price,na.rm = TRUE)) |> ungroup()
+
+#Condo
+by_month_year_Condo <- Condo_Price |> mutate(Year = as.integer(format(as.Date(Date), "%Y")),Month = as.integer(format(as.Date(Date), "%m")))|>
+    group_by(Year)
+
+#mean price Condo by year
+mean_by_year_Condo <- by_month_year_Condo |> group_by(Year, Month) |> summarize(mean_Condo_price = mean(Condo_Price,na.rm = TRUE)) |> ungroup()
+
+
+#we will use two data: mean_by_year_SFH and mean_by_year_Condo for the hypothesis testing (both n = 75)
+library(stats)
+result <- t.test(x = mean_by_year_SFH, y = mean_by_year_Condo, alternative = "two.sided")
+print(result)
 ```
 
 
