@@ -40,9 +40,9 @@ library(ggplot2, quietly = TRUE)
 
 
 # read the Single Family House Data
-SFH <- read.csv("..//Project/Single Family House.csv")
+SFH <- read.csv("D:/SP__24/MATH 167R/Project/167R/Single Family House.csv")
 # read the Single Condo Data
-Condo <- read.csv("..//Project/Condo.csv")
+Condo <- read.csv("D:/SP__24/MATH 167R/Project/167R/Condo.csv")
 
 ```
 
@@ -55,7 +55,7 @@ index_Jan2018 <- grep("2018", colnames(SFH))[1] #[1] to get the first col in 201
     
 # Extract the data since Jan 2018 to the latest
 Temp_SFH <- SFH|>
-                select(3, 6, 7, 8, all_of(index_Jan2018_Condo) : ncol(SFH)) 
+ select(3, 6, 7, 8, all_of(index_Jan2018_Condo) : ncol(SFH)) 
              
 # Convert the table from wide to long format as the years are shown in columns
 SFH_Price <- pivot_longer(
