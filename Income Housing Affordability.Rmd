@@ -8,6 +8,7 @@ output: html_document
 TEXXXXXT
 test2
 test3
+test4
 
 Research topic: Income Housing Affordability in California
 The main question: Is Californian’s income sufficient to afford to buy a house?
