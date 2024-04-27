@@ -1,0 +1,188 @@
+"CAINC1 County and MSA personal income summary: personal income, population, per capita personal income",,,,,,,,
+"CAINC1 County and MSA personal income summary: personal income, population, per capita personal income",,,,,,,,
+County,,,,,,,,
+GeoFips,GeoName,LineCode,Description,2018,2019,2020,2021,2022
+6000,California,1,Personal income (thousands of dollars),2411055136,2537950599,2767521379,3013676929,3006647281
+6000,California,2,Population (persons) 1,39535906,39547996,39501653,39142991,39029342
+6000,California,3,Per capita personal income (dollars) 2,60984,64174,70061,76991,77036
+6001,"Alameda, CA",1,Personal income (thousands of dollars),124671796,134505557,147136291,162176203,159241119
+6001,"Alameda, CA",2,Population (persons) 1,1680371,1683879,1680380,1643837,1628997
+6001,"Alameda, CA",3,Per capita personal income (dollars) 2,74193,79878,87561,98657,97754
+6003,"Alpine, CA",1,Personal income (thousands of dollars),85025,94006,89202,86288,80386
+6003,"Alpine, CA",2,Population (persons) 1,1142,1184,1204,1235,1190
+6003,"Alpine, CA",3,Per capita personal income (dollars) 2,74453,79397,74088,69869,67551
+6005,"Amador, CA",1,Personal income (thousands of dollars),1660611,1760594,1919536,2056386,2006939
+6005,"Amador, CA",2,Population (persons) 1,39702,40093,40532,41144,41412
+6005,"Amador, CA",3,Per capita personal income (dollars) 2,41827,43913,47359,49980,48463
+6007,"Butte, CA",1,Personal income (thousands of dollars),9718118,9927494,10781637,11548920,11396345
+6007,"Butte, CA",2,Population (persons) 1,227962,216206,210135,206190,207303
+6007,"Butte, CA",3,Per capita personal income (dollars) 2,42630,45917,51308,56011,54974
+6009,"Calaveras, CA",1,Personal income (thousands of dollars),2126248,2265619,2452765,2621697,2607568
+6009,"Calaveras, CA",2,Population (persons) 1,44956,45226,45346,46219,46563
+6009,"Calaveras, CA",3,Per capita personal income (dollars) 2,47296,50095,54090,56723,56001
+6011,"Colusa, CA",1,Personal income (thousands of dollars),986398,970603,1225922,1295098,1216260
+6011,"Colusa, CA",2,Population (persons) 1,21620,21734,21858,21913,21914
+6011,"Colusa, CA",3,Per capita personal income (dollars) 2,45624,44658,56086,59102,55502
+6013,"Contra Costa, CA",1,Personal income (thousands of dollars),91160536,93446849,100692971,110320394,109965993
+6013,"Contra Costa, CA",2,Population (persons) 1,1161220,1164547,1165986,1163298,1156966
+6013,"Contra Costa, CA",3,Per capita personal income (dollars) 2,78504,80243,86359,94834,95047
+6015,"Del Norte, CA",1,Personal income (thousands of dollars),967786,1011557,1144798,1231849,1182855
+6015,"Del Norte, CA",2,Population (persons) 1,27580,27664,27601,27553,27082
+6015,"Del Norte, CA",3,Per capita personal income (dollars) 2,35090,36566,41477,44708,43677
+6017,"El Dorado, CA",1,Personal income (thousands of dollars),12509360,13203465,14187909,15436024,15808893
+6017,"El Dorado, CA",2,Population (persons) 1,189442,191376,191220,193590,192646
+6017,"El Dorado, CA",3,Per capita personal income (dollars) 2,66033,68992,74197,79736,82062
+6019,"Fresno, CA",1,Personal income (thousands of dollars),40504743,42828739,48552515,52363942,51316407
+6019,"Fresno, CA",2,Population (persons) 1,997501,1004849,1009503,1012992,1015190
+6019,"Fresno, CA",3,Per capita personal income (dollars) 2,40606,42622,48095,51692,50549
+6021,"Glenn, CA",1,Personal income (thousands of dollars),1206997,1250310,1430189,1497724,1446856
+6021,"Glenn, CA",2,Population (persons) 1,28376,28991,28896,28664,28339
+6021,"Glenn, CA",3,Per capita personal income (dollars) 2,42536,43128,49494,52251,51055
+6023,"Humboldt, CA",1,Personal income (thousands of dollars),6029582,6283125,6850029,7310048,7296395
+6023,"Humboldt, CA",2,Population (persons) 1,137591,137054,136261,134836,135010
+6023,"Humboldt, CA",3,Per capita personal income (dollars) 2,43823,45844,50271,54214,54043
+6025,"Imperial, CA",1,Personal income (thousands of dollars),6353010,6740447,8183274,8643247,8075656
+6025,"Imperial, CA",2,Population (persons) 1,180396,179694,179595,179215,178713
+6025,"Imperial, CA",3,Per capita personal income (dollars) 2,35217,37511,45565,48228,45188
+6027,"Inyo, CA",1,Personal income (thousands of dollars),1024203,1089334,1134595,1153492,1151182
+6027,"Inyo, CA",2,Population (persons) 1,18666,18866,19001,18927,18718
+6027,"Inyo, CA",3,Per capita personal income (dollars) 2,54870,57741,59712,60944,61501
+6029,"Kern, CA",1,Personal income (thousands of dollars),33813117,35596941,40300516,42561996,41098858
+6029,"Kern, CA",2,Population (persons) 1,900315,906453,905828,912351,916108
+6029,"Kern, CA",3,Per capita personal income (dollars) 2,37557,39271,44490,46651,44862
+6031,"Kings, CA",1,Personal income (thousands of dollars),5296250,5548160,6292586,6690054,6505590
+6031,"Kings, CA",2,Population (persons) 1,151138,152633,152790,152679,152981
+6031,"Kings, CA",3,Per capita personal income (dollars) 2,35042,36350,41185,43818,42525
+6033,"Lake, CA",1,Personal income (thousands of dollars),2625869,2726156,3001704,3213324,3111067
+6033,"Lake, CA",2,Population (persons) 1,67333,67771,68195,68584,68191
+6033,"Lake, CA",3,Per capita personal income (dollars) 2,38998,40226,44016,46852,45623
+6035,"Lassen, CA",1,Personal income (thousands of dollars),1072008,1086453,1230010,1309137,1217102
+6035,"Lassen, CA",2,Population (persons) 1,32854,33169,32317,31813,29904
+6035,"Lassen, CA",3,Per capita personal income (dollars) 2,32629,32755,38061,41151,40700
+6037,"Los Angeles, CA",1,Personal income (thousands of dollars),595765931,628932215,673306158,720046822,720740528
+6037,"Los Angeles, CA",2,Population (persons) 1,10096986,10051154,9992236,9811842,9721138
+6037,"Los Angeles, CA",3,Per capita personal income (dollars) 2,59004,62573,67383,73385,74142
+6039,"Madera, CA",1,Personal income (thousands of dollars),5815299,6076859,6940713,7553475,7436909
+6039,"Madera, CA",2,Population (persons) 1,155430,155658,156343,158910,160256
+6039,"Madera, CA",3,Per capita personal income (dollars) 2,37414,39040,44394,47533,46406
+6041,"Marin, CA",1,Personal income (thousands of dollars),33770671,35896884,37796487,42936183,43824350
+6041,"Marin, CA",2,Population (persons) 1,263646,263057,261282,259162,256018
+6041,"Marin, CA",3,Per capita personal income (dollars) 2,128091,136460,144658,165673,171177
+6043,"Mariposa, CA",1,Personal income (thousands of dollars),884466,919965,979407,1036419,1042143
+6043,"Mariposa, CA",2,Population (persons) 1,17328,17081,17118,17107,17020
+6043,"Mariposa, CA",3,Per capita personal income (dollars) 2,51043,53859,57215,60584,61230
+6045,"Mendocino, CA",1,Personal income (thousands of dollars),4155689,4322898,4794385,5159935,5145470
+6045,"Mendocino, CA",2,Population (persons) 1,91838,91721,91361,91003,89783
+6045,"Mendocino, CA",3,Per capita personal income (dollars) 2,45250,47131,52477,56701,57310
+6047,"Merced, CA",1,Personal income (thousands of dollars),10148451,10711229,12445651,13532782,13395227
+6047,"Merced, CA",2,Population (persons) 1,275626,279263,281814,284458,290014
+6047,"Merced, CA",3,Per capita personal income (dollars) 2,36820,38355,44163,47574,46188
+6049,"Modoc, CA",1,Personal income (thousands of dollars),381904,406924,459764,476942,481376
+6049,"Modoc, CA",2,Population (persons) 1,8729,8768,8663,8571,8511
+6049,"Modoc, CA",3,Per capita personal income (dollars) 2,43751,46410,53072,55646,56559
+6051,"Mono, CA",1,Personal income (thousands of dollars),663504,726930,798867,834235,847409
+6051,"Mono, CA",2,Population (persons) 1,13328,13250,13226,13261,12978
+6051,"Mono, CA",3,Per capita personal income (dollars) 2,49783,54863,60401,62909,65296
+6053,"Monterey, CA",1,Personal income (thousands of dollars),23001148,24421471,26398134,28333347,28189179
+6053,"Monterey, CA",2,Population (persons) 1,439404,440163,438390,437249,432858
+6053,"Monterey, CA",3,Per capita personal income (dollars) 2,52346,55483,60216,64799,65123
+6055,"Napa, CA",1,Personal income (thousands of dollars),9657020,10184848,11260752,11907435,11665710
+6055,"Napa, CA",2,Population (persons) 1,139937,139146,137485,136206,134300
+6055,"Napa, CA",3,Per capita personal income (dollars) 2,69010,73195,81905,87422,86863
+6057,"Nevada, CA",1,Personal income (thousands of dollars),5821249,6163728,6796594,7333293,7442705
+6057,"Nevada, CA",2,Population (persons) 1,101530,101962,102249,103457,102293
+6057,"Nevada, CA",3,Per capita personal income (dollars) 2,57335,60451,66471,70883,72759
+6059,"Orange, CA",1,Personal income (thousands of dollars),210648610,221692307,240734263,257834298,263290135
+6059,"Orange, CA",2,Population (persons) 1,3188828,3185685,3185516,3161005,3151184
+6059,"Orange, CA",3,Per capita personal income (dollars) 2,66058,69590,75572,81567,83553
+6061,"Placer, CA",1,Personal income (thousands of dollars),25586686,27147695,30054657,32903884,34170169
+6061,"Placer, CA",2,Population (persons) 1,394841,401317,405889,412789,417772
+6061,"Placer, CA",3,Per capita personal income (dollars) 2,64803,67647,74046,79711,81791
+6063,"Plumas, CA",1,Personal income (thousands of dollars),926506,977680,1079139,1170312,1149201
+6063,"Plumas, CA",2,Population (persons) 1,19464,19772,19749,19940,19351
+6063,"Plumas, CA",3,Per capita personal income (dollars) 2,47601,49448,54643,58692,59387
+6065,"Riverside, CA",1,Personal income (thousands of dollars),96994918,103614307,116939915,126261006,127195983
+6065,"Riverside, CA",2,Population (persons) 1,2390121,2405570,2422847,2453178,2473902
+6065,"Riverside, CA",3,Per capita personal income (dollars) 2,40582,43073,48265,51468,51415
+6067,"Sacramento, CA",1,Personal income (thousands of dollars),78526608,82815002,90813891,98105641,97517936
+6067,"Sacramento, CA",2,Population (persons) 1,1560721,1575602,1586465,1588106,1584169
+6067,"Sacramento, CA",3,Per capita personal income (dollars) 2,50314,52561,57243,61775,61558
+6069,"San Benito, CA",1,Personal income (thousands of dollars),3094215,3411723,3864377,4143744,4169135
+6069,"San Benito, CA",2,Population (persons) 1,61751,63188,64521,66675,67579
+6069,"San Benito, CA",3,Per capita personal income (dollars) 2,50108,53993,59893,62148,61693
+6071,"San Bernardino, CA",1,Personal income (thousands of dollars),83514331,89182422,100359889,108700135,108081645
+6071,"San Bernardino, CA",2,Population (persons) 1,2160049,2170992,2183239,2192882,2193656
+6071,"San Bernardino, CA",3,Per capita personal income (dollars) 2,38663,41079,45968,49570,49270
+6073,"San Diego, CA",1,Personal income (thousands of dollars),194949226,204586175,222600097,240216669,243506541
+6073,"San Diego, CA",2,Population (persons) 1,3303463,3297959,3296045,3274954,3276208
+6073,"San Diego, CA",3,Per capita personal income (dollars) 2,59014,62034,67536,73350,74326
+6075,"San Francisco, CA",1,Personal income (thousands of dollars),111996017,112133213,117292346,129774521,125970097
+6075,"San Francisco, CA",2,Population (persons) 1,882277,881739,870393,811253,808437
+6075,"San Francisco, CA",3,Per capita personal income (dollars) 2,126940,127173,134758,159968,155819
+6077,"San Joaquin, CA",1,Personal income (thousands of dollars),32261357,34952093,40056124,43999624,42979635
+6077,"San Joaquin, CA",2,Population (persons) 1,762314,772611,780558,788140,793229
+6077,"San Joaquin, CA",3,Per capita personal income (dollars) 2,42320,45239,51317,55827,54183
+6079,"San Luis Obispo, CA",1,Personal income (thousands of dollars),15708604,16665789,17765128,19192484,19162980
+6079,"San Luis Obispo, CA",2,Population (persons) 1,283176,282646,281879,279298,282013
+6079,"San Luis Obispo, CA",3,Per capita personal income (dollars) 2,55473,58963,63024,68717,67951
+6081,"San Mateo, CA",1,Personal income (thousands of dollars),95143957,99027638,108186874,129090019,127657596
+6081,"San Mateo, CA",2,Population (persons) 1,771628,768402,762511,739060,729181
+6081,"San Mateo, CA",3,Per capita personal income (dollars) 2,123303,128875,141882,174668,175070
+6083,"Santa Barbara, CA",1,Personal income (thousands of dollars),26706505,27936118,30839511,33642845,33607554
+6083,"Santa Barbara, CA",2,Population (persons) 1,447724,448368,448244,437434,443837
+6083,"Santa Barbara, CA",3,Per capita personal income (dollars) 2,59649,62306,68801,76910,75720
+6085,"Santa Clara, CA",1,Personal income (thousands of dollars),207881196,218542457,240677946,272711739,270162197
+6085,"Santa Clara, CA",2,Population (persons) 1,1950712,1943313,1931026,1886595,1870945
+6085,"Santa Clara, CA",3,Per capita personal income (dollars) 2,106567,112459,124637,144552,144399
+6087,"Santa Cruz, CA",1,Personal income (thousands of dollars),17767743,18933052,21176826,23183258,22832350
+6087,"Santa Cruz, CA",2,Population (persons) 1,274005,273196,270462,260495,264370
+6087,"Santa Cruz, CA",3,Per capita personal income (dollars) 2,64845,69302,78299,88997,86365
+6089,"Shasta, CA",1,Personal income (thousands of dollars),7976743,8334396,9325879,9926304,9791945
+6089,"Shasta, CA",2,Population (persons) 1,181939,182196,181984,181981,180930
+6089,"Shasta, CA",3,Per capita personal income (dollars) 2,43843,45744,51246,54546,54120
+6091,"Sierra, CA",1,Personal income (thousands of dollars),127577,135131,145880,154098,154021
+6091,"Sierra, CA",2,Population (persons) 1,3209,3238,3228,3295,3217
+6091,"Sierra, CA",3,Per capita personal income (dollars) 2,39756,41733,45192,46767,47877
+6093,"Siskiyou, CA",1,Personal income (thousands of dollars),1868074,1923781,2168815,2310238,2261048
+6093,"Siskiyou, CA",2,Population (persons) 1,44196,44306,43991,44026,43660
+6093,"Siskiyou, CA",3,Per capita personal income (dollars) 2,42268,43420,49301,52474,51788
+6095,"Solano, CA",1,Personal income (thousands of dollars),21899263,23350113,25816822,26963798,26149679
+6095,"Solano, CA",2,Population (persons) 1,450921,453051,452698,450350,448747
+6095,"Solano, CA",3,Per capita personal income (dollars) 2,48566,51540,57029,59873,58273
+6097,"Sonoma, CA",1,Personal income (thousands of dollars),30283557,32300805,35091038,38047053,37598558
+6097,"Sonoma, CA",2,Population (persons) 1,495914,490867,488281,484315,482650
+6097,"Sonoma, CA",3,Per capita personal income (dollars) 2,61066,65804,71866,78558,77900
+6099,"Stanislaus, CA",1,Personal income (thousands of dollars),22792301,23954863,26848535,28820142,28123096
+6099,"Stanislaus, CA",2,Population (persons) 1,549847,552003,553217,552851,551275
+6099,"Stanislaus, CA",3,Per capita personal income (dollars) 2,41452,43396,48532,52130,51015
+6101,"Sutter, CA",1,Personal income (thousands of dollars),4168235,4373169,4927076,5289376,5122683
+6101,"Sutter, CA",2,Population (persons) 1,98810,99690,99464,99038,98503
+6101,"Sutter, CA",3,Per capita personal income (dollars) 2,42184,43868,49536,53408,52005
+6103,"Tehama, CA",1,Personal income (thousands of dollars),2512451,2653050,2947996,3121904,3087088
+6103,"Tehama, CA",2,Population (persons) 1,64783,66192,65682,65380,65245
+6103,"Tehama, CA",3,Per capita personal income (dollars) 2,38783,40081,44883,47750,47315
+6105,"Trinity, CA",1,Personal income (thousands of dollars),482368,500196,538535,565409,573075
+6105,"Trinity, CA",2,Population (persons) 1,15720,15812,16089,16061,15781
+6105,"Trinity, CA",3,Per capita personal income (dollars) 2,30685,31634,33472,35204,36314
+6107,"Tulare, CA",1,Personal income (thousands of dollars),17824523,18728754,21572811,23191982,22585661
+6107,"Tulare, CA",2,Population (persons) 1,468208,470173,473891,476946,477544
+6107,"Tulare, CA",3,Per capita personal income (dollars) 2,38070,39834,45523,48626,47295
+6109,"Tuolumne, CA",1,Personal income (thousands of dollars),2411046,2534017,2749488,2930342,2879540
+6109,"Tuolumne, CA",2,Population (persons) 1,55039,55176,55374,55065,54531
+6109,"Tuolumne, CA",3,Per capita personal income (dollars) 2,43806,45926,49653,53216,52806
+6111,"Ventura, CA",1,Personal income (thousands of dollars),50711842,53163902,57575258,62554527,63589878
+6111,"Ventura, CA",2,Population (persons) 1,848290,845396,843310,839358,832605
+6111,"Ventura, CA",3,Per capita personal income (dollars) 2,59781,62886,68273,74527,76375
+6113,"Yolo, CA",1,Personal income (thousands of dollars),11304743,11974697,13043398,14126183,14277264
+6113,"Yolo, CA",2,Population (persons) 1,217233,216829,216291,213039,222115
+6113,"Yolo, CA",3,Per capita personal income (dollars) 2,52040,55226,60305,66308,64279
+6115,"Yuba, CA",1,Personal income (thousands of dollars),3108945,3306694,3745504,4078703,4064114
+6115,"Yuba, CA",2,Population (persons) 1,78776,80095,81994,83216,84310
+6115,"Yuba, CA",3,Per capita personal income (dollars) 2,39466,41285,45680,49013,48204
+,,,,,,,,
+Legend/Footnotes,,,,,,,,
+"1. Census Bureau midyear population estimate. BEA produced intercensal annual county population statistics for 2010 to 2019 that are tied to the Census Bureau decennial counts for 2010 and 2020. BEA developed intercensal population statistics because this data was not published when Census released county population data for 2020 through 2022, which are based on the 2020 decennial counts. BEA used the Census Bureau Das Gupta method (see https://www2.census.gov/programs-surveys/popest/technical-documentation/methodology/intercensal/2000-2010-intercensal-estimates-methodology.pdf), modified to account for an extra leap year day, to produce the intercensal population figures that will be used until Census releases its official intercensal population data.",,,,,,,,
+"2. Per capita personal income was computed using Census Bureau midyear population estimates. BEA produced intercensal annual county population statistics for 2010 to 2019 that are tied to the Census Bureau decennial counts for 2010 and 2020. BEA developed intercensal population statistics because this data was not published when Census released county population data for 2020 and 2022, which are based on the 2020 decennial counts. BEA used the Census Bureau Das Gupta method (see https://www2.census.gov/programs-surveys/popest/technical-documentation/methodology/intercensal/2000-2010-intercensal-estimates-methodology.pdf), modified to account for an extra leap year day, to produce the intercensal population figures that will be used until Census releases its official intercensal population data.",,,,,,,,
+"  Metropolitan Areas are defined (geographically delineated) by the Office of Management and Budget (OMB) bulletin no. 20-01 issued March 6, 2020.",,,,,,,,
+Note. All dollar estimates are in thousands of current dollars (not adjusted for inflation). Statistics presented in thousands of dollars do not indicate more precision than statistics presented in millions of dollars.,,,,,,,,
+"  Last updated: November 16, 2023-- new statistics for 2022; revised statistics for 1979-2021.",,,,,,,,
