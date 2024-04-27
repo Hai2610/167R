@@ -4,9 +4,7 @@ author: "Hien Vo & Hai Nguyen"
 date: "2024-04-26"
 output: html_document
 ---
-hh
-Hai test
-h test từ file Rstudio lun
+
 
 Research topic: Income Housing Affordability in California
 The main question: Is Californian’s income sufficient to afford to buy a house?
