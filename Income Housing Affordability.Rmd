@@ -27,15 +27,16 @@ salary?
 5/ How has the mortgage rate changed since 2018? Create a line plot and interpret
 the relaƟonship between the median house price and mortgage
 
-```{r}
+```{r, message=FALSE}
 library(dplyr, quietly = TRUE)
 library(tidyverse, quietly = TRUE)
 library(tidyselect, quietly = TRUE)
 
 # read the Single Family House Data
-SFH <- read.csv("..//Project/Single Family House.csv")
-# read the Single Condo Data
-Condo <- read.csv("..//Project/Condo.csv")
+MORTGAGE15US <- readr::read_csv("MORTGAGE15US.csv")
+MORTGAGE30US <- readr::read_csv("MORTGAGE30US.csv")
+CONDO <- readr::read_csv("Condo.csv")
+ 
 
 ```
 
