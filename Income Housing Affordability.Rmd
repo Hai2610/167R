@@ -268,5 +268,5 @@ result <- t.test(x = mean_by_year_SFH, y = mean_by_year_Condo, alternative = "tw
 print(result)
 ```
 
-xxx
+xxxx
 
