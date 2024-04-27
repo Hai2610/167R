@@ -6,6 +6,7 @@ output: html_document
 ---
 hh
 Hai test
+h test từ file Rstudio lun
 
 Research topic: Income Housing Affordability in California
 The main question: Is Californian’s income sufficient to afford to buy a house?
