@@ -246,20 +246,20 @@ ggplot(Median_HP_SantaClara_filtered,
 
 HAI MOI LAM
 
-```{r}
+```{r, message=FALSE}
 
 #SFH
-by_month_year_SFH <- SFH_Price |> mutate(Year = as.integer(format(as.Date(Date), "%Y")),Month = as.integer(format(as.Date(Date), "%m")))|>
+by_month_year_SFH <- SFH_CA |> mutate(Year = as.integer(format(as.Date(Date), "%Y")),Month = as.integer(format(as.Date(Date), "%m")))|>
     group_by(Year)
 #mean price SFH by year
-mean_by_year_SFH <- by_month_year_SFH |> group_by(Year, Month) |> summarize(mean_SFH_price = mean(SFH_Price,na.rm = TRUE),  .groups = 'drop') |> ungroup()
+mean_by_year_SFH <- by_month_year_SFH |> group_by(Year, Month) |> summarize(mean_SFH_price = mean(SFH_Price,na.rm = TRUE),.groups = 'drop') |> ungroup()
 
 #Condo
-by_month_year_Condo <- Condo_Price |> mutate(Year = as.integer(format(as.Date(Date), "%Y")),Month = as.integer(format(as.Date(Date), "%m")))|>
+by_month_year_Condo <- Condo_CA |> mutate(Year = as.integer(format(as.Date(Date), "%Y")),Month = as.integer(format(as.Date(Date), "%m")))|>
     group_by(Year)
 
 #mean price Condo by year
-mean_by_year_Condo <- by_month_year_Condo |> group_by(Year, Month) |> summarize(mean_Condo_price = mean(Condo_Price,na.rm = TRUE),  .groups = 'drop') |> ungroup()
+mean_by_year_Condo <- by_month_year_Condo |> group_by(Year, Month) |> summarize(mean_Condo_price = mean(Condo_Price,na.rm = TRUE),.groups = 'drop') |> ungroup()
 
 
 #we will use two data: mean_by_year_SFH and mean_by_year_Condo for the hypothesis testing (both n = 75)
