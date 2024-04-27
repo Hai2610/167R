@@ -5,9 +5,6 @@ date: "2024-04-26"
 output: html_document
 ---
 
-test1
-test2
-
 Research topic: Income Housing Affordability in California
 The main question: Is Californian’s income sufficient to afford to buy a house?
 
@@ -24,16 +21,15 @@ salary?
 5/ How has the mortgage rate changed since 2018? Create a line plot and interpret
 the relaƟonship between the median house price and mortgage
 
-```{r, message=FALSE}
+```{r}
 library(dplyr, quietly = TRUE)
 library(tidyverse, quietly = TRUE)
-library(tidyselect, quietly = TRUE)
+
 
 # read the Single Family House Data
-MORTGAGE15US <- readr::read_csv("MORTGAGE15US.csv")
-MORTGAGE30US <- readr::read_csv("MORTGAGE30US.csv")
-Condo <- readr::read_csv("Condo.csv")
-SFH <- readr::read_csv("Single Family House.csv")
+SFH <- read.csv("..//Project/Single Family House.csv")
+# read the Single Condo Data
+Condo <- read.csv("..//Project/Condo.csv")
 
 ```
 
@@ -42,39 +38,31 @@ A. Filter House Prices Data
 1. Filter Single Family House Data
 ```{r}
 # Find the index of the column of Jan 2018
-index_Jan2018 <- grep(2018, colnames(SFH))[1] #[1] to get the first col in 2018
+index_Jan2018 <- grep("2018", colnames(SFH))[1] #[1] to get the first col in 2018
     
 # Extract the data since Jan 2018 to the latest
 Temp_SFH <- SFH|>
-                select(3, 5, 7, 8, index_Jan2018:ncol(SFH)) 
-              #col 3 = City name/Region Name, #col 5 = State Name, $col 7 = Metro; #col 8 = County
-
+                select(3, 6, 7, 8, index_Jan2018 : ncol(SFH)) 
+             
 # Convert the table from wide to long format as the years are shown in columns
 SFH_Price <- pivot_longer(
                           Temp_SFH,
                           cols = 5 : ncol(Temp_SFH),
                           names_to = "Date",
                           values_to = "Price")
-# Format date
-SFH_Price <- SFH_Price |>
-                mutate(Date = as.Date(strptime(Date, format = "X%m.%d.%Y")))
 
-names(SFH_Price) <- c("City", "State", "Metro", "County", "Date", "SFH Price")
+# Format date and change column's names
+SFH_Price <- SFH_Price |>
+             mutate(Date = as.Date(strptime(Date, format = "X%m.%d.%Y")))
+
+names(SFH_Price) <- c("City", "State", "Metro", "County", "Date", "SFH_Price")
 
 # Note: SFH_Price is the table including all single family homes prices of the US by City from 2018 to present.
 
 SFH_CA <- SFH_Price |>  # single family homes prices in California from 2018 to present.
-                  filter(State == "CA", na.rm = TRUE)
+          filter(State == "CA", na.rm = TRUE)
 
 ```
-
-```{r}
-library(tidyverse)
-library(dplyr)
- 
-```
-
-
 
 
 2. Filter Single Condo Data
@@ -84,8 +72,8 @@ index_Jan2018_Condo <- grep(2018, colnames(Condo))[1] #[1] to get the first col 
     
 # Extract the data since Jan 2018 to the latest
 Temp_Condo <- Condo|>
-                select(3, 5, 7, 8, index_Jan2018_Condo:ncol(Condo)) 
-              #col 3 = City name/Region Name, #col 5 = State Name, $col 7 = Metro; #col 8 = County
+              select(3, 6, 7, 8, index_Jan2018_Condo : ncol(Condo)) 
+              #col 3 = City name/Region Name, #col 6 = State Name, $col 7 = Metro; #col 8 = County
 
 # Convert the table from wide to long format as the years are shown in columns
 Condo_Price <- pivot_longer(
@@ -93,39 +81,37 @@ Condo_Price <- pivot_longer(
                           cols = 5 : ncol(Temp_Condo),
                           names_to = "Date",
                           values_to = "Price")
-# Format date
+# Format date and change column's names
 Condo_Price <- Condo_Price |>
-                mutate(Date = as.Date(strptime(Date, format = "X%m.%d.%Y")))
-names(Condo_Price) <- c("City", "State", "Metro", "County", "Date", "Condo Price")
+               mutate(Date = as.Date(strptime(Date, format = "X%m.%d.%Y")))
+
+names(Condo_Price) <- c("City", "State", "Metro", "County", "Date", "Condo_Price")
 
 # Note: SFH_Price is the table including all Condo prices of the US by City from 2018 to present.
 
 Condo_CA <- Condo_Price |>  # Condo prices in California from 2018 to present.
-                  filter(State == "CA", na.rm = TRUE)
-
-Condo_mean_price <- mean(Condo_CA$`Condo Price`)
+            filter(State == "CA", na.rm = TRUE)
 
 ```
 
-3. Merge data
+3. Merge data: SFH and Condo Prices in California
 
 ```{r}
-Join_HP <- merge(SFH_Price, Condo_Price, by = c("City"), na.rm = TRUE, all = TRUE)
+Join_HP_CA <- merge(SFH_CA, Condo_CA, by = c("City", "State", "Metro", "County", "Date"), all = TRUE)
+
 ```
 
 B. 
 1/ How has the median house price changed in California since 2018?
 
 ```{r}
-Median_SFH_CA <- SFH_CA |>
-                 mutate(Year = format(Date, "%Y")) |>
-                 group_by(Year) |>
-                 summarize (Median_SFH_CA = median(Price, na.rm = TRUE))
 
-Median_Condo_CA <- Condo_CA |>
+Median_HP_CA <- Join_HP_CA|>
                  mutate(Year = format(Date, "%Y")) |>
                  group_by(Year) |>
-                 summarize (Median_Condo_CA = median(Price, na.rm = TRUE))
+                 summarize (Median_SFH_CA = median(SFH_Price, na.rm = TRUE),
+                            Median_Condo_CA = median(Condo_Price, na.rm = TRUE))
+
 
 
 ```
