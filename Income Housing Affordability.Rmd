@@ -5,13 +5,7 @@ date: "2024-04-26"
 output: html_document
 ---
 
-TEXXXXXT
-test2
-test3
-test4
-test5
-test6
-test7
+test1
 
 Research topic: Income Housing Affordability in California
 The main question: Is Californian’s income sufficient to afford to buy a house?
@@ -37,8 +31,8 @@ library(tidyselect, quietly = TRUE)
 # read the Single Family House Data
 MORTGAGE15US <- readr::read_csv("MORTGAGE15US.csv")
 MORTGAGE30US <- readr::read_csv("MORTGAGE30US.csv")
-CONDO <- readr::read_csv("Condo.csv")
-
+Condo <- readr::read_csv("Condo.csv")
+SFH <- readr::read_csv("Single Family House.csv")
 
  
 
