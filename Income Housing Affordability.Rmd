@@ -34,8 +34,6 @@ MORTGAGE30US <- readr::read_csv("MORTGAGE30US.csv")
 Condo <- readr::read_csv("Condo.csv")
 SFH <- readr::read_csv("Single Family House.csv")
 
- 
-
 ```
 
 A. Filter House Prices Data
@@ -69,6 +67,14 @@ SFH_CA <- SFH_Price |>  # single family homes prices in California from 2018 to 
 
 ```
 
+```{r}
+library(tidyverse)
+library(dplyr)
+ 
+```
+
+
+
 
 2. Filter Single Condo Data
 ```{r}
@@ -95,6 +101,8 @@ names(Condo_Price) <- c("City", "State", "Metro", "County", "Date", "Condo Price
 
 Condo_CA <- Condo_Price |>  # Condo prices in California from 2018 to present.
                   filter(State == "CA", na.rm = TRUE)
+
+Condo_mean_price <- mean(Condo_CA$`Condo Price`)
 
 ```
 
