@@ -4,7 +4,7 @@ author: "Hien Vo & Hai Nguyen"
 date: "2024-04-26"
 output: html_document
 ---
-
+hh
 Research topic: Income Housing Affordability in California
 The main question: Is Californian’s income sufficient to afford to buy a house?
 
@@ -21,9 +21,22 @@ salary?
 5/ How has the mortgage rate changed since 2018? Create a line plot and interpret
 the relaƟonship between the median house price and mortgage
 
+Variable definition
+
+SHF           :   Single Family Home Raw Data
+Condo         :   Condo Raw Data
+SFH_Price     :   Single Family Home Price Data in the US from 2018
+SFH_CA        :   Single Family Home Price Data in California from 2018
+Condo_Price   :   Condo Price Data in the US from 2018
+Condo_CA      :   Condo Price Data in California from 2018
+Join_HP_CA    :   Merge Data House Prices (including SFH and Condo) in California from 2018
+Median_HP_CA  :   Median House Price (Including SFH and Condo) in California from 2018
+
+
 ```{r}
 library(dplyr, quietly = TRUE)
 library(tidyverse, quietly = TRUE)
+library(ggplot2, quietly = TRUE)
 
 
 # read the Single Family House Data
@@ -42,7 +55,7 @@ index_Jan2018 <- grep("2018", colnames(SFH))[1] #[1] to get the first col in 201
     
 # Extract the data since Jan 2018 to the latest
 Temp_SFH <- SFH|>
-                select(3, 6, 7, 8, index_Jan2018 : ncol(SFH)) 
+                select(3, 6, 7, 8, all_of(index_Jan2018_Condo) : ncol(SFH)) 
              
 # Convert the table from wide to long format as the years are shown in columns
 SFH_Price <- pivot_longer(
@@ -72,7 +85,7 @@ index_Jan2018_Condo <- grep(2018, colnames(Condo))[1] #[1] to get the first col 
     
 # Extract the data since Jan 2018 to the latest
 Temp_Condo <- Condo|>
-              select(3, 6, 7, 8, index_Jan2018_Condo : ncol(Condo)) 
+              select(3, 6, 7, 8, all_of(index_Jan2018_Condo) : ncol(Condo)) 
               #col 3 = City name/Region Name, #col 6 = State Name, $col 7 = Metro; #col 8 = County
 
 # Convert the table from wide to long format as the years are shown in columns
@@ -105,14 +118,23 @@ B.
 1/ How has the median house price changed in California since 2018?
 
 ```{r}
-
-Median_HP_CA <- Join_HP_CA|>
+# Find Median Price
+Median_HP_CA <- Join_HP_CA |>
                  mutate(Year = format(Date, "%Y")) |>
                  group_by(Year) |>
-                 summarize (Median_SFH_CA = median(SFH_Price, na.rm = TRUE),
-                            Median_Condo_CA = median(Condo_Price, na.rm = TRUE))
+                 summarize (Median_SFH_Price = median(SFH_Price, na.rm = TRUE),
+                            Median_Condo_Price = median(Condo_Price, na.rm = TRUE))
 
+Median_HP_CA$Year <- as.numeric(Median_HP_CA$Year) # convert Year Column to numeric
 
+ggplot(Median_HP_CA, aes(x = Year)) +
+  geom_line(aes(y = Median_SFH_Price, color = "Median_SFH_Price")) +
+  geom_line(aes(y = Median_Condo_Price, color = "Median_Condo_Price")) +
+  labs(title = "House Prices in California from 2018 to Present",
+       x = "Year",
+       y = "Median Price") +
+  scale_color_manual(values = c("Median_SFH_Price" = "blue", "Median_Condo_Price" = "red")) +
+  theme_minimal()
 
 ```
 
