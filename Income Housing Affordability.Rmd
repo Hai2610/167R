@@ -40,8 +40,7 @@ Median_HP_CA  :   Median House Price (Including SFH and Condo) in California fro
 library(dplyr, quietly = TRUE)
 library(tidyverse, quietly = TRUE)
 library(ggplot2, quietly = TRUE)
-
-
+ 
 # read the Single Family House Data
 SFH <- read.csv("D:/SP__24/MATH 167R/Project/167R/Single Family House.csv")
 # read the Single Condo Data
@@ -121,7 +120,7 @@ B.
 1/ How has the median house price changed in California since 2018?
 
 ```{r}
-# Find Median Price
+# B1.1. Find Median Price
 Median_HP_CA <- Join_HP_CA |>
                  mutate(Year = format(Date, "%Y")) |>
                  group_by(Year) |>
@@ -135,10 +134,116 @@ ggplot(Median_HP_CA, aes(x = Year)) +
   geom_line(aes(y = Median_Condo_Price, color = "Median_Condo_Price")) +
   labs(title = "House Prices in California from 2018 to Present",
        x = "Year",
-       y = "Median Price") +
+       y = "Mean Price") +
   scale_color_manual(values = c("Median_SFH_Price" = "blue", "Median_Condo_Price" = "red")) +
+   scale_y_continuous(labels = scales::dollar_format(prefix = "$"), breaks = seq(0, 1000000, by = 50000)) +
+   theme_minimal()
+
+```
+
+```{r} 
+# B1.2. Find Mean Price
+Mean_HP_CA <- Join_HP_CA |>
+                 mutate(Year = format(Date, "%Y")) |>
+                 group_by(Year) |>
+                 summarize (Mean_SFH_Price = mean(SFH_Price, na.rm = TRUE),
+                            Mean_Condo_Price = mean(Condo_Price, na.rm = TRUE))
+
+Mean_HP_CA$Year <- as.numeric(Mean_HP_CA$Year) # convert Year Column to numeric
+
+ggplot(Mean_HP_CA, aes(x = Year)) +
+  geom_line(aes(y = Mean_SFH_Price, color = "Mean_SFH_Price")) +
+  geom_line(aes(y = Mean_Condo_Price, color = "Mean_Condo_Price")) +
+  labs(title = "House Prices in California from 2018 to Present",
+       x = "Year",
+       y = "Mean Price") +
+  scale_color_manual(values = c("Mean_SFH_Price" = "blue", "Mean_Condo_Price" = "red")) +
+  scale_y_continuous(labels = scales::dollar_format(prefix = "$"), breaks = seq(0, 1000000, by = 50000)) +
+   theme_minimal()
+
+
+```
+
+Which county has experienced the highest increase in house pricing over the 2018-now period?
+
+```{r}
+# Find Median Price based on County and sort the data by median value from high to low 
+#Condo
+Condo_CA_County <- Condo_CA |>
+                    mutate(Year = format(Date, "%Y")) |>
+                    group_by(Year, County) |>
+                    summarize (Median_Condo_CA_County = median(Condo_Price, na.rm = TRUE), 
+                               .groups = 'drop') |> 
+                    arrange(desc(Year), desc(Median_Condo_CA_County))
+
+Condo_CA_County 
+
+Highest_Condo_Prices_byYear <- Condo_CA_County |>
+                     group_by(Year) |>
+                     top_n(1, Median_Condo_CA_County)
+
+Lowest_Condo_Prices_byYear <- Condo_CA_County |>
+                     group_by(Year) |>
+                     top_n(-1, Median_Condo_CA_County)
+
+print(Highest_Condo_Prices_byYear) 
+Lowest_Condo_Prices_byYear 
+
+
+#Single Family Home
+SFH_CA_County <- SFH_CA |>
+                    mutate(Year = format(Date, "%Y")) |>
+                    group_by(Year, County) |>
+                    summarize (Median_SFH_CA_County = median(SFH_Price, na.rm = TRUE), 
+                               .groups = 'drop') |> 
+                    arrange(desc(Year), desc(Median_SFH_CA_County))
+
+SFH_CA_County 
+
+Highest_SFH_Prices_byYear <- SFH_CA_County |>
+                     group_by(Year) |>
+                     top_n(1, Median_SFH_CA_County)
+
+Lowest_SFH_Prices_byYear <- SFH_CA_County |>
+                     group_by(Year) |>
+                     top_n(-1, Median_SFH_CA_County)
+
+print(Highest_SFH_Prices_byYear) 
+Lowest_SFH_Prices_byYear 
+```
+
+```{r}
+# plot house prices in Santa Clara County
+Median_HP_SantaClara <- Join_HP_CA |>
+                 filter(County == "Santa Clara County")|>
+                 group_by(Date, City) |>
+                 summarize (Median_SFH_Price_SantaClara = median(SFH_Price, na.rm = TRUE),
+                            Median_Condo_Price_SantaClara = median(Condo_Price, na.rm = TRUE))
+
+Median_HP_SantaClara_filtered <- na.omit(Median_HP_SantaClara)
+
+# plot Median Single Family Home Prices in Santa Clara COunty
+ggplot(Median_HP_SantaClara_filtered, 
+       aes(x = Date, y = Median_SFH_Price_SantaClara, group = City, color = City)) +
+       labs(title = "Median Single Family Home Prices in Santa Clara County from 2018 to present",
+            x = "Year", 
+            y = "Median Single Family Home Prices")+
+  geom_line(size = 1) +
+  scale_y_continuous(labels = scales::dollar_format(prefix = "$"), breaks = seq(0, 5000000, by = 500000)) +
+   theme_minimal()
+
+
+# plot Median Condo Prices in Santa Clara County
+ggplot(Median_HP_SantaClara_filtered, 
+       aes(x = Date, y = Median_Condo_Price_SantaClara, group = City, color = City)) +
+       labs(title = "Median Single Condo Prices in Santa Clara County from 2018 to present",
+            x = "Year", 
+            y = "Median Single Family Home Prices")+
+  geom_line(size = 1) +
+  scale_y_continuous(labels = scales::dollar_format(prefix = "$"), breaks = seq(0, 3000000, by = 250000)) +
   theme_minimal()
 
 ```
+
 
 
