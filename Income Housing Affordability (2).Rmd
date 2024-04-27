@@ -2,7 +2,9 @@
 title: "Income Housing Affordability"
 author: "Hien Vo & Hai Nguyen"
 date: "2024-04-26"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 hh
 Hai test
@@ -125,8 +127,8 @@ B.
 Median_HP_CA <- Join_HP_CA |>
                  mutate(Year = format(Date, "%Y")) |>
                  group_by(Year) |>
-                 summarize (Median_SFH_Price = median(SFH_Price, na.rm = TRUE),
-                            Median_Condo_Price = median(Condo_Price, na.rm = TRUE))
+                 summarize (Median_SFH_Price = mean(SFH_Price, na.rm = TRUE),
+                            Median_Condo_Price = mean(Condo_Price, na.rm = TRUE))
 
 Median_HP_CA$Year <- as.numeric(Median_HP_CA$Year) # convert Year Column to numeric
 
@@ -140,5 +142,41 @@ ggplot(Median_HP_CA, aes(x = Year)) +
   theme_minimal()
 
 ```
+```{r}
+ggplot(data = mean_by_year_SFH, aes( x = Month, y = mean_SFH_price))
+   
+```
 
+
+
+```{r}
+#SFH
+by_month_year_SFH <- SFH_Price |> mutate(Year = as.integer(format(as.Date(Date), "%Y")),Month = as.integer(format(as.Date(Date), "%m")))|>
+    group_by(Year)
+#mean price SFH by year
+mean_by_year_SFH <- by_month_year_SFH |> group_by(Year, Month) |> summarize(mean_SFH_price = mean(SFH_Price,na.rm = TRUE)) |> ungroup()
+
+#Condo
+by_month_year_Condo <- Condo_Price |> mutate(Year = as.integer(format(as.Date(Date), "%Y")),Month = as.integer(format(as.Date(Date), "%m")))|>
+    group_by(Year)
+
+#mean price Condo by year
+mean_by_year_Condo <- by_month_year_Condo |> group_by(Year, Month) |> summarize(mean_Condo_price = mean(Condo_Price,na.rm = TRUE)) |> ungroup()
+
+
+#we will use two data: mean_by_year_SFH and mean_by_year_Condo for the hypothesis testing (both n = 75)
+library(stats)
+result <- t.test(x = mean_by_year_SFH, y = mean_by_year_Condo, alternative = "two.sided")
+print(result)
+
+
+
+```
+
+
+
+
+ 
+
+```
 
