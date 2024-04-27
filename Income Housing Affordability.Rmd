@@ -34,6 +34,7 @@ Condo_Price   :   Condo Price Data in the US from 2018
 Condo_CA      :   Condo Price Data in California from 2018
 Join_HP_CA    :   Merge Data House Prices (including SFH and Condo) in California from 2018
 Median_HP_CA  :   Median House Price (Including SFH and Condo) in California from 2018
+Mean_HP_CA    :   Mean House Price (Including SFH and Condo) in California from 2018
 
 
 ```{r}
@@ -242,22 +243,25 @@ ggplot(Median_HP_SantaClara_filtered,
   geom_line(size = 1) +
   scale_y_continuous(labels = scales::dollar_format(prefix = "$"), breaks = seq(0, 3000000, by = 250000)) +
   theme_minimal()
+```
 
 
 HAI MOI LAM
+
 ```{r}
+
 #SFH
 by_month_year_SFH <- SFH_Price |> mutate(Year = as.integer(format(as.Date(Date), "%Y")),Month = as.integer(format(as.Date(Date), "%m")))|>
     group_by(Year)
 #mean price SFH by year
-mean_by_year_SFH <- by_month_year_SFH |> group_by(Year, Month) |> summarize(mean_SFH_price = mean(SFH_Price,na.rm = TRUE)) |> ungroup()
+mean_by_year_SFH <- by_month_year_SFH |> group_by(Year, Month) |> summarize(mean_SFH_price = mean(SFH_Price,na.rm = TRUE),  .groups = 'drop') |> ungroup()
 
 #Condo
 by_month_year_Condo <- Condo_Price |> mutate(Year = as.integer(format(as.Date(Date), "%Y")),Month = as.integer(format(as.Date(Date), "%m")))|>
     group_by(Year)
 
 #mean price Condo by year
-mean_by_year_Condo <- by_month_year_Condo |> group_by(Year, Month) |> summarize(mean_Condo_price = mean(Condo_Price,na.rm = TRUE)) |> ungroup()
+mean_by_year_Condo <- by_month_year_Condo |> group_by(Year, Month) |> summarize(mean_Condo_price = mean(Condo_Price,na.rm = TRUE),  .groups = 'drop') |> ungroup()
 
 
 #we will use two data: mean_by_year_SFH and mean_by_year_Condo for the hypothesis testing (both n = 75)
