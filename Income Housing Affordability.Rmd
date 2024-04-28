@@ -254,7 +254,9 @@ by_month_year_SFH <- SFH_CA |> mutate(Year = as.integer(format(as.Date(Date), "%
     group_by(Year)
 #mean price SFH by year
 mean_by_year_SFH <- by_month_year_SFH |> group_by(Year, Month) |> summarize(mean_SFH_price = mean(SFH_Price,na.rm = TRUE),.groups = 'drop') |> ungroup()
+```
 
+```{r}
 #Condo
 by_month_year_Condo <- Condo_CA |> mutate(Year = as.integer(format(as.Date(Date), "%Y")),Month = as.integer(format(as.Date(Date), "%m")))|>
     group_by(Year)
@@ -272,8 +274,22 @@ by_month_year_rate30 <- rate30us |> mutate(Year = as.integer(format(as.Date(DATE
 #MORGAGE RATE 30 US by YEAR/Month
 by_month_year_rate30_from2018 <- filter(by_month_year_rate30, Year >="2018") |> group_by(Year, Month) |>summarize(mean_rate30 = mean(MORTGAGE30US,na.rm = TRUE),.groups = 'drop') |> ungroup()
 
+#Merge/ combine date "by_month_year_rate30_from2018" and "mean_by_year_SFH"
+SFH_with_rate30 <- full_join(by_month_year_rate30_from2018,mean_by_year_SFH, by = c("Month","Year" ))
+```
 
+Linear Regression
+```{r}
+#for SFH
+lm_res_SHF = lm(mean_SFH_price ~ mean_rate30, data = SFH_with_rate30)
+lm_res_SHF
 
+#plot
+plot(mean_SFH_price ~ mean_rate30, data = SFH_with_rate30,
+     xlab = "Rate (%)",
+     ylab = "SFH price ($)", 
+     pch  = 16, col  = "blue")
+abline(lm_res_SHF,  col = "red")
 
 ```
 
