@@ -4,9 +4,7 @@ author: "Hien Vo & Hai Nguyen"
 date: "2024-04-26"
 output: html_document
 ---
-hh
-Hai test
-h test từ file Rstudio lun
+
 
 Research topic: Income Housing Affordability in California
 The main question: Is Californian’s income sufficient to afford to buy a house?
@@ -46,6 +44,7 @@ library(ggplot2, quietly = TRUE)
 SFH <- read.csv("D:/SP__24/MATH 167R/Project/167R/Single Family House.csv")
 # read the Single Condo Data
 Condo <- read.csv("D:/SP__24/MATH 167R/Project/167R/Condo.csv")
+rate30us <- read.csv("D:/SP__24/MATH 167R/Project/167R/MORTGAGE30US.csv")
 
 ```
 
@@ -245,27 +244,66 @@ ggplot(Median_HP_SantaClara_filtered,
 
 HAI MOI LAM
 
-```{r}
+```{r, message=FALSE}
 
 #SFH
-by_month_year_SFH <- SFH_Price |> mutate(Year = as.integer(format(as.Date(Date), "%Y")),Month = as.integer(format(as.Date(Date), "%m")))|>
+by_month_year_SFH <- SFH_CA |> mutate(Year = as.integer(format(as.Date(Date), "%Y")),Month = as.integer(format(as.Date(Date), "%m")))|>
     group_by(Year)
 #mean price SFH by year
-mean_by_year_SFH <- by_month_year_SFH |> group_by(Year, Month) |> summarize(mean_SFH_price = mean(SFH_Price,na.rm = TRUE),  .groups = 'drop') |> ungroup()
+mean_by_year_SFH <- by_month_year_SFH |> group_by(Year, Month) |> summarize(mean_SFH_price = mean(SFH_Price,na.rm = TRUE),.groups = 'drop') |> ungroup()
+```
 
+```{r}
 #Condo
-by_month_year_Condo <- Condo_Price |> mutate(Year = as.integer(format(as.Date(Date), "%Y")),Month = as.integer(format(as.Date(Date), "%m")))|>
+by_month_year_Condo <- Condo_CA |> mutate(Year = as.integer(format(as.Date(Date), "%Y")),Month = as.integer(format(as.Date(Date), "%m")))|>
     group_by(Year)
 
 #mean price Condo by year
-mean_by_year_Condo <- by_month_year_Condo |> group_by(Year, Month) |> summarize(mean_Condo_price = mean(Condo_Price,na.rm = TRUE),  .groups = 'drop') |> ungroup()
+mean_by_year_Condo <- by_month_year_Condo |> group_by(Year, Month) |> summarize(mean_Condo_price = mean(Condo_Price,na.rm = TRUE),.groups = 'drop') |> ungroup()
 
-
-#we will use two data: mean_by_year_SFH and mean_by_year_Condo for the hypothesis testing (both n = 75)
-library(stats)
-result <- t.test(x = mean_by_year_SFH, y = mean_by_year_Condo, alternative = "two.sided")
-print(result)
 ```
 
+Rate30US Data
+```{r}
+by_month_year_rate30 <- rate30us |> mutate(Year = as.integer(format(as.Date(DATE), "%Y")),Month = as.integer(format(as.Date(DATE), "%m")))|>
+    group_by(Year)
+
+#MORGAGE RATE 30 US by YEAR/Month
+by_month_year_rate30_from2018 <- filter(by_month_year_rate30, Year >="2018") |> group_by(Year, Month) |>summarize(mean_rate30 = mean(MORTGAGE30US,na.rm = TRUE),.groups = 'drop') |> ungroup()
+
+#Merge/ combine date "by_month_year_rate30_from2018" and "mean_by_year_SFH"
+SFH_with_rate30 <- full_join(by_month_year_rate30_from2018,mean_by_year_SFH, by = c("Month","Year" ))
+
+
+#Merge/ combine date "by_month_year_rate30_from2018" and "mean_by_year_SFH"
+Condo_with_rate30 <- full_join(by_month_year_rate30_from2018,mean_by_year_Condo, by = c("Month","Year" ))
+
+```
+
+Linear Regression
+```{r}
+#for SFH
+lm_res_SHF = lm(mean_SFH_price ~ mean_rate30, data = SFH_with_rate30)
+lm_res_SHF
+
+#plot
+plot(mean_SFH_price ~ mean_rate30, data = SFH_with_rate30,
+     xlab = "Rate (%)",
+     ylab = "SFH price ($)", 
+     pch  = 16, col  = "blue")
+abline(lm_res_SHF,  col = "red")
+
+
+#For COndo 
+lm_res_Condo = lm(mean_Condo_price ~ mean_rate30, data = Condo_with_rate30)
+lm_res_Condo
+
+#plot
+plot(mean_Condo_price ~ mean_rate30, data = Condo_with_rate30,
+     xlab = "Rate (%)",
+     ylab = "Condo price ($)", 
+     pch  = 16, col  = "purple")
+abline(lm_res_Condo,  col = "black")
+```
 
 
