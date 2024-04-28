@@ -306,4 +306,4 @@ plot(mean_Condo_price ~ mean_rate30, data = Condo_with_rate30,
 abline(lm_res_Condo,  col = "black")
 ```
 xxx444
-
+w
