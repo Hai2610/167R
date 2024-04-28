@@ -57,7 +57,7 @@ index_Jan2018 <- grep("2018", colnames(SFH))[1] #[1] to get the first col in 201
     
 # Extract the data since Jan 2018 to the latest
 Temp_SFH <- SFH|>
- select(3, 6, 7, 8, all_of(index_Jan2018_Condo) : ncol(SFH)) 
+ select(3, 6, 7, 8, all_of(index_Jan2018):ncol(SFH)) 
              
 # Convert the table from wide to long format as the years are shown in columns
 SFH_Price <- pivot_longer(
@@ -293,7 +293,10 @@ plot(mean_SFH_price ~ mean_rate30, data = SFH_with_rate30,
      pch  = 16, col  = "blue")
 abline(lm_res_SHF,  col = "red")
 
- 
+
+``` 
+
+```{r}
 
 
 #For COndo 
@@ -307,5 +310,31 @@ plot(mean_Condo_price ~ mean_rate30, data = Condo_with_rate30,
      pch  = 16, col  = "purple")
 abline(lm_res_Condo,  col = "black")
 ```
-xxx444
-w
+```{r}
+HP_CA_with_rate30 <- full_join(by_month_year_rate30,Mean_HP_CA, by = "Year")
+
+HP_CA_with_rate30_from2018 <- HP_CA_with_rate30 |> filter(Year >=2018)
+
+p <- ggplot(HP_CA_with_rate30_from2018, aes(x = Date)) +
+  geom_line(aes(y = Mean_SFH_Price, color = "Mean_SFH_Price")) +
+  geom_line(aes(y = Mean_Condo_Price, color = "Mean_Condo_Price")) +
+  geom_line(aes(y = MORTGAGE30US, color = "Mortgage rate 30")) +
+  labs(title = "House Prices in California from 2018 to Present with mortgage rate 30",
+       x = "Year",
+       y = "Mean Price") +
+scale_color_manual(values = c("Median_SFH_Price" = "#99CC66", "Median_Condo_Price" = "#FF99CC","Mortgage rate 30" = "black" )) +
+  scale_y_continuous(labels = scales::dollar_format(prefix = "$"), breaks = seq(0, 10, by = 0.2)) 
+  
+  p1 <- p +
+  geom_line(aes(y = MORTGAGE30US*10000 , color = "Percentage")) +
+  scale_y_continuous(
+    sec.axis = sec_axis(~./100, name = "Percentage", labels = scales::percent_format()),
+    limits = c(1, 10),
+    breaks = seq(0, 10, by = 2.5)
+  ) +
+  theme(axis.title.y.right = element_text(color = "red"))+
+   theme_minimal()
+print(p1)
+
+```
+
