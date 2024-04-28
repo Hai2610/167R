@@ -305,5 +305,5 @@ plot(mean_Condo_price ~ mean_rate30, data = Condo_with_rate30,
      pch  = 16, col  = "purple")
 abline(lm_res_Condo,  col = "black")
 ```
-
+xxx
 
