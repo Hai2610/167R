@@ -276,6 +276,11 @@ by_month_year_rate30_from2018 <- filter(by_month_year_rate30, Year >="2018") |> 
 
 #Merge/ combine date "by_month_year_rate30_from2018" and "mean_by_year_SFH"
 SFH_with_rate30 <- full_join(by_month_year_rate30_from2018,mean_by_year_SFH, by = c("Month","Year" ))
+
+
+#Merge/ combine date "by_month_year_rate30_from2018" and "mean_by_year_SFH"
+Condo_with_rate30 <- full_join(by_month_year_rate30_from2018,mean_by_year_Condo, by = c("Month","Year" ))
+
 ```
 
 Linear Regression
@@ -291,6 +296,17 @@ plot(mean_SFH_price ~ mean_rate30, data = SFH_with_rate30,
      pch  = 16, col  = "blue")
 abline(lm_res_SHF,  col = "red")
 
+
+#For COndo 
+lm_res_Condo = lm(mean_Condo_price ~ mean_rate30, data = Condo_with_rate30)
+lm_res_Condo
+
+#plot
+plot(mean_Condo_price ~ mean_rate30, data = Condo_with_rate30,
+     xlab = "Rate (%)",
+     ylab = "Condo price ($)", 
+     pch  = 16, col  = "purple")
+abline(lm_res_Condo,  col = "black")
 ```
 
 
