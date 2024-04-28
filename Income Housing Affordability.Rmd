@@ -293,6 +293,8 @@ plot(mean_SFH_price ~ mean_rate30, data = SFH_with_rate30,
      pch  = 16, col  = "blue")
 abline(lm_res_SHF,  col = "red")
 
+ 
+
 
 #For COndo 
 lm_res_Condo = lm(mean_Condo_price ~ mean_rate30, data = Condo_with_rate30)
