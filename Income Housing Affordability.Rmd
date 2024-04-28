@@ -1,0 +1,309 @@
+---
+title: "Income Housing Affordability"
+author: "Hien Vo & Hai Nguyen"
+date: "2024-04-26"
+output: html_document
+---
+
+
+Research topic: Income Housing Affordability in California
+The main question: Is Californian’s income sufficient to afford to buy a house?
+
+Sub-questions:
+
+1/ How has the median house price changed in California since 2018? Which county
+has experienced the highest increase in house pricing over the 2018-now period?
+2/ How has the median personal income changed in California since 2018? In which
+county has the highest median personal income now?
+3/ What is the ratio of median house price to median personal income in each
+county? In which county Californians can be easier to buy a house based on their
+salary?
+4/ What is the growth in house prices compared to median personal incomes?
+5/ How has the mortgage rate changed since 2018? Create a line plot and interpret
+the relaƟonship between the median house price and mortgage
+
+Variable definition
+
+SHF           :   Single Family Home Raw Data
+Condo         :   Condo Raw Data
+SFH_Price     :   Single Family Home Price Data in the US from 2018
+SFH_CA        :   Single Family Home Price Data in California from 2018
+Condo_Price   :   Condo Price Data in the US from 2018
+Condo_CA      :   Condo Price Data in California from 2018
+Join_HP_CA    :   Merge Data House Prices (including SFH and Condo) in California from 2018
+Median_HP_CA  :   Median House Price (Including SFH and Condo) in California from 2018
+Mean_HP_CA    :   Mean House Price (Including SFH and Condo) in California from 2018
+
+
+```{r}
+library(dplyr, quietly = TRUE)
+library(tidyverse, quietly = TRUE)
+library(ggplot2, quietly = TRUE)
+ 
+# read the Single Family House Data
+SFH <- read.csv("D:/SP__24/MATH 167R/Project/167R/Single Family House.csv")
+# read the Single Condo Data
+Condo <- read.csv("D:/SP__24/MATH 167R/Project/167R/Condo.csv")
+rate30us <- read.csv("D:/SP__24/MATH 167R/Project/167R/MORTGAGE30US.csv")
+
+```
+
+A. Filter House Prices Data
+
+1. Filter Single Family House Data
+```{r}
+# Find the index of the column of Jan 2018
+index_Jan2018 <- grep("2018", colnames(SFH))[1] #[1] to get the first col in 2018
+    
+# Extract the data since Jan 2018 to the latest
+Temp_SFH <- SFH|>
+ select(3, 6, 7, 8, all_of(index_Jan2018_Condo) : ncol(SFH)) 
+             
+# Convert the table from wide to long format as the years are shown in columns
+SFH_Price <- pivot_longer(
+                          Temp_SFH,
+                          cols = 5 : ncol(Temp_SFH),
+                          names_to = "Date",
+                          values_to = "Price")
+
+# Format date and change column's names
+SFH_Price <- SFH_Price |>
+             mutate(Date = as.Date(strptime(Date, format = "X%m.%d.%Y")))
+
+names(SFH_Price) <- c("City", "State", "Metro", "County", "Date", "SFH_Price")
+
+# Note: SFH_Price is the table including all single family homes prices of the US by City from 2018 to present.
+
+SFH_CA <- SFH_Price |>  # single family homes prices in California from 2018 to present.
+          filter(State == "CA", na.rm = TRUE)
+
+```
+
+
+2. Filter Single Condo Data
+```{r}
+# Find the index of the column of Jan 2018
+index_Jan2018_Condo <- grep(2018, colnames(Condo))[1] #[1] to get the first col in 2018
+    
+# Extract the data since Jan 2018 to the latest
+Temp_Condo <- Condo|>
+              select(3, 6, 7, 8, all_of(index_Jan2018_Condo) : ncol(Condo)) 
+              #col 3 = City name/Region Name, #col 6 = State Name, $col 7 = Metro; #col 8 = County
+
+# Convert the table from wide to long format as the years are shown in columns
+Condo_Price <- pivot_longer(
+                          Temp_Condo,
+                          cols = 5 : ncol(Temp_Condo),
+                          names_to = "Date",
+                          values_to = "Price")
+# Format date and change column's names
+Condo_Price <- Condo_Price |>
+               mutate(Date = as.Date(strptime(Date, format = "X%m.%d.%Y")))
+
+names(Condo_Price) <- c("City", "State", "Metro", "County", "Date", "Condo_Price")
+
+# Note: SFH_Price is the table including all Condo prices of the US by City from 2018 to present.
+
+Condo_CA <- Condo_Price |>  # Condo prices in California from 2018 to present.
+            filter(State == "CA", na.rm = TRUE)
+
+```
+
+3. Merge data: SFH and Condo Prices in California
+
+```{r}
+Join_HP_CA <- merge(SFH_CA, Condo_CA, by = c("City", "State", "Metro", "County", "Date"), all = TRUE)
+
+```
+
+B. 
+1/ How has the median house price changed in California since 2018?
+
+```{r}
+# B1.1. Find Median Price
+Median_HP_CA <- Join_HP_CA |>
+                 group_by(Date) |>
+                 summarize (Median_SFH_Price = median(SFH_Price, na.rm = TRUE),
+                            Median_Condo_Price = median(Condo_Price, na.rm = TRUE))
+
+Median_HP_CA$Date <- as.numeric(Median_HP_CA$Date) # convert Year Column to numeric
+
+ggplot(Median_HP_CA, aes(x = Date)) +
+  geom_line(aes(y = Median_SFH_Price, color = "Median_SFH_Price")) +
+  geom_line(aes(y = Median_Condo_Price, color = "Median_Condo_Price")) +
+  labs(title = "House Prices in California from 2018 to Present",
+       x = "Year",
+       y = "Mean Price") +
+  scale_color_manual(values = c("Median_SFH_Price" = "#99CC66", "Median_Condo_Price" = "#FF99CC")) +
+   scale_y_continuous(labels = scales::dollar_format(prefix = "$"), breaks = seq(0, 1000000, by = 50000)) +
+   theme_minimal()
+
+```
+
+```{r} 
+# B1.2. Find Mean Price
+Mean_HP_CA <- Join_HP_CA |>
+                 group_by(Date) |>
+                 summarize (Mean_SFH_Price = mean(SFH_Price, na.rm = TRUE),
+                            Mean_Condo_Price = mean(Condo_Price, na.rm = TRUE)) |>
+                 mutate(Year = year(Date))
+
+Mean_HP_CA$Year <- as.numeric(Mean_HP_CA$Year) # convert Year Column to numeric
+
+ggplot(Mean_HP_CA, aes(x = Date)) +
+  geom_line(aes(y = Mean_SFH_Price, color = "Mean_SFH_Price")) +
+  geom_line(aes(y = Mean_Condo_Price, color = "Mean_Condo_Price")) +
+  labs(title = "House Prices in California from 2018 to Present",
+       x = "Year",
+       y = "Mean Price") +
+  scale_color_manual(values = c("Mean_SFH_Price" = "#99CC66", "Mean_Condo_Price" = "#FF99CC")) +
+  scale_y_continuous(labels = scales::dollar_format(prefix = "$"), breaks = seq(0, 1000000, by = 50000)) +
+   theme_minimal()
+```
+
+Which county has experienced the highest increase in house pricing over the 2018-now period?
+
+```{r}
+# Find Median Price based on County and sort the data by median value from high to low 
+#Condo
+Condo_CA_County <- Condo_CA |>
+                    mutate(Year = format(Date, "%Y")) |>
+                    group_by(Year, County) |>
+                    summarize (Median_Condo_CA_County = median(Condo_Price, na.rm = TRUE), 
+                               .groups = 'drop') |> 
+                    arrange(desc(Year), desc(Median_Condo_CA_County))
+
+Condo_CA_County 
+
+Highest_Condo_Prices_byYear <- Condo_CA_County |>
+                     group_by(Year) |>
+                     top_n(1, Median_Condo_CA_County)
+
+Lowest_Condo_Prices_byYear <- Condo_CA_County |>
+                     group_by(Year) |>
+                     top_n(-1, Median_Condo_CA_County)
+
+print(Highest_Condo_Prices_byYear) 
+Lowest_Condo_Prices_byYear 
+
+
+#Single Family Home
+SFH_CA_County <- SFH_CA |>
+                    mutate(Year = format(Date, "%Y")) |>
+                    group_by(Year, County) |>
+                    summarize (Median_SFH_CA_County = median(SFH_Price, na.rm = TRUE), 
+                               .groups = 'drop') |> 
+                    arrange(desc(Year), desc(Median_SFH_CA_County))
+
+SFH_CA_County 
+
+Highest_SFH_Prices_byYear <- SFH_CA_County |>
+                     group_by(Year) |>
+                     top_n(1, Median_SFH_CA_County)
+
+Lowest_SFH_Prices_byYear <- SFH_CA_County |>
+                     group_by(Year) |>
+                     top_n(-1, Median_SFH_CA_County)
+
+print(Highest_SFH_Prices_byYear) 
+Lowest_SFH_Prices_byYear 
+```
+
+```{r}
+# plot house prices in Santa Clara County
+Median_HP_SantaClara <- Join_HP_CA |>
+                 filter(County == "Santa Clara County")|>
+                 group_by(Date, City) |>
+                 summarize (Median_SFH_Price_SantaClara = median(SFH_Price, na.rm = TRUE),
+                            Median_Condo_Price_SantaClara = median(Condo_Price, na.rm = TRUE))
+
+Median_HP_SantaClara_filtered <- na.omit(Median_HP_SantaClara)
+
+# plot Median Single Family Home Prices in Santa Clara COunty
+ggplot(Median_HP_SantaClara_filtered, 
+       aes(x = Date, y = Median_SFH_Price_SantaClara, group = City, color = City)) +
+       labs(title = "Median Single Family Home Prices in Santa Clara County from 2018 to present",
+            x = "Year", 
+            y = "Median Single Family Home Prices")+
+  geom_line(size = 1) +
+  scale_y_continuous(labels = scales::dollar_format(prefix = "$"), breaks = seq(0, 5000000, by = 500000)) +
+   theme_minimal()
+
+
+# plot Median Condo Prices in Santa Clara County
+ggplot(Median_HP_SantaClara_filtered, 
+       aes(x = Date, y = Median_Condo_Price_SantaClara, group = City, color = City)) +
+       labs(title = "Median Single Condo Prices in Santa Clara County from 2018 to present",
+            x = "Year", 
+            y = "Median Single Family Home Prices")+
+  geom_line(size = 1) +
+  scale_y_continuous(labels = scales::dollar_format(prefix = "$"), breaks = seq(0, 3000000, by = 250000)) +
+  theme_minimal()
+```
+
+
+HAI MOI LAM
+
+```{r, message=FALSE}
+
+#SFH
+by_month_year_SFH <- SFH_CA |> mutate(Year = as.integer(format(as.Date(Date), "%Y")),Month = as.integer(format(as.Date(Date), "%m")))|>
+    group_by(Year)
+#mean price SFH by year
+mean_by_year_SFH <- by_month_year_SFH |> group_by(Year, Month) |> summarize(mean_SFH_price = mean(SFH_Price,na.rm = TRUE),.groups = 'drop') |> ungroup()
+```
+
+```{r}
+#Condo
+by_month_year_Condo <- Condo_CA |> mutate(Year = as.integer(format(as.Date(Date), "%Y")),Month = as.integer(format(as.Date(Date), "%m")))|>
+    group_by(Year)
+
+#mean price Condo by year
+mean_by_year_Condo <- by_month_year_Condo |> group_by(Year, Month) |> summarize(mean_Condo_price = mean(Condo_Price,na.rm = TRUE),.groups = 'drop') |> ungroup()
+
+```
+
+Rate30US Data
+```{r}
+by_month_year_rate30 <- rate30us |> mutate(Year = as.integer(format(as.Date(DATE), "%Y")),Month = as.integer(format(as.Date(DATE), "%m")))|>
+    group_by(Year)
+
+#MORGAGE RATE 30 US by YEAR/Month
+by_month_year_rate30_from2018 <- filter(by_month_year_rate30, Year >="2018") |> group_by(Year, Month) |>summarize(mean_rate30 = mean(MORTGAGE30US,na.rm = TRUE),.groups = 'drop') |> ungroup()
+
+#Merge/ combine date "by_month_year_rate30_from2018" and "mean_by_year_SFH"
+SFH_with_rate30 <- full_join(by_month_year_rate30_from2018,mean_by_year_SFH, by = c("Month","Year" ))
+
+
+#Merge/ combine date "by_month_year_rate30_from2018" and "mean_by_year_SFH"
+Condo_with_rate30 <- full_join(by_month_year_rate30_from2018,mean_by_year_Condo, by = c("Month","Year" ))
+
+```
+
+Linear Regression
+```{r}
+#for SFH
+lm_res_SHF = lm(mean_SFH_price ~ mean_rate30, data = SFH_with_rate30)
+lm_res_SHF
+
+#plot
+plot(mean_SFH_price ~ mean_rate30, data = SFH_with_rate30,
+     xlab = "Rate (%)",
+     ylab = "SFH price ($)", 
+     pch  = 16, col  = "blue")
+abline(lm_res_SHF,  col = "red")
+
+
+#For COndo 
+lm_res_Condo = lm(mean_Condo_price ~ mean_rate30, data = Condo_with_rate30)
+lm_res_Condo
+
+#plot
+plot(mean_Condo_price ~ mean_rate30, data = Condo_with_rate30,
+     xlab = "Rate (%)",
+     ylab = "Condo price ($)", 
+     pch  = 16, col  = "purple")
+abline(lm_res_Condo,  col = "black")
+```
+xxx444
+
