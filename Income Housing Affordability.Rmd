@@ -123,20 +123,19 @@ B.
 ```{r}
 # B1.1. Find Median Price
 Median_HP_CA <- Join_HP_CA |>
-                 mutate(Year = format(Date, "%Y")) |>
-                 group_by(Year) |>
+                 group_by(Date) |>
                  summarize (Median_SFH_Price = median(SFH_Price, na.rm = TRUE),
                             Median_Condo_Price = median(Condo_Price, na.rm = TRUE))
 
-Median_HP_CA$Year <- as.numeric(Median_HP_CA$Year) # convert Year Column to numeric
+Median_HP_CA$Date <- as.numeric(Median_HP_CA$Date) # convert Year Column to numeric
 
-ggplot(Median_HP_CA, aes(x = Year)) +
+ggplot(Median_HP_CA, aes(x = Date)) +
   geom_line(aes(y = Median_SFH_Price, color = "Median_SFH_Price")) +
   geom_line(aes(y = Median_Condo_Price, color = "Median_Condo_Price")) +
   labs(title = "House Prices in California from 2018 to Present",
        x = "Year",
        y = "Mean Price") +
-  scale_color_manual(values = c("Median_SFH_Price" = "blue", "Median_Condo_Price" = "red")) +
+  scale_color_manual(values = c("Median_SFH_Price" = "#99CC66", "Median_Condo_Price" = "#FF99CC")) +
    scale_y_continuous(labels = scales::dollar_format(prefix = "$"), breaks = seq(0, 1000000, by = 50000)) +
    theme_minimal()
 
@@ -145,24 +144,22 @@ ggplot(Median_HP_CA, aes(x = Year)) +
 ```{r} 
 # B1.2. Find Mean Price
 Mean_HP_CA <- Join_HP_CA |>
-                 mutate(Year = format(Date, "%Y")) |>
-                 group_by(Year) |>
+                 group_by(Date) |>
                  summarize (Mean_SFH_Price = mean(SFH_Price, na.rm = TRUE),
-                            Mean_Condo_Price = mean(Condo_Price, na.rm = TRUE))
+                            Mean_Condo_Price = mean(Condo_Price, na.rm = TRUE)) |>
+                 mutate(Year = year(Date))
 
 Mean_HP_CA$Year <- as.numeric(Mean_HP_CA$Year) # convert Year Column to numeric
 
-ggplot(Mean_HP_CA, aes(x = Year)) +
+ggplot(Mean_HP_CA, aes(x = Date)) +
   geom_line(aes(y = Mean_SFH_Price, color = "Mean_SFH_Price")) +
   geom_line(aes(y = Mean_Condo_Price, color = "Mean_Condo_Price")) +
   labs(title = "House Prices in California from 2018 to Present",
        x = "Year",
        y = "Mean Price") +
-  scale_color_manual(values = c("Mean_SFH_Price" = "blue", "Mean_Condo_Price" = "red")) +
+  scale_color_manual(values = c("Mean_SFH_Price" = "#99CC66", "Mean_Condo_Price" = "#FF99CC")) +
   scale_y_continuous(labels = scales::dollar_format(prefix = "$"), breaks = seq(0, 1000000, by = 50000)) +
    theme_minimal()
-
-
 ```
 
 Which county has experienced the highest increase in house pricing over the 2018-now period?
